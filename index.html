@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Central - Play Games Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🎮 Game Central</h1>
+                <p>Your Ultimate Gaming Destination</p>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-menu">
+            <button class="nav-btn active" data-page="games">Games</button>
+            <button class="nav-btn" data-page="suggest">Suggest a Game</button>
+        </nav>
+
+        <!-- Games Page -->
+        <div id="games-page" class="page active">
+            <!-- Search/Filter Section -->
+            <div class="filter-section">
+                <input type="text" id="searchInput" placeholder="Search games..." class="search-box">
+                <div class="category-buttons">
+                    <button class="category-btn active" data-category="all">All Games</button>
+                    <button class="category-btn" data-category="adventure">Adventure</button>
+                    <button class="category-btn" data-category="puzzle">Puzzle</button>
+                    <button class="category-btn" data-category="action">Action</button>
+                </div>
+            </div>
+
+            <!-- Games Grid -->
+            <main class="games-container">
+                <!-- Adventure Games -->
+                <section class="game-section" data-category="adventure">
+                    <h2 class="category-title">🚗 Adventure Games</h2>
+                    <div class="games-grid">
+                        <div class="game-card" data-name="drive mad">
+                            <div class="game-image">🚙</div>
+                            <h3>Drive Mad</h3>
+                            <p>Crazy driving challenges await!</p>
+                            <a href="https://www.drivemadgame.com/" target="_blank" class="play-btn">Play Now</a>
+                        </div>
+                        <div class="game-card" data-name="subway surfers">
+                            <div class="game-image">🚇</div>
+                            <h3>Subway Surfers</h3>
+                            <p>Run, dodge, and collect coins!</p>
+                            <a href="https://www.subwaysurfers.org/" target="_blank" class="play-btn">Play Now</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Puzzle Games -->
+                <section class="game-section" data-category="puzzle">
+                    <h2 class="category-title">🧩 Puzzle Games</h2>
+                    <div class="games-grid">
+                        <div class="game-card" data-name="level devil">
+                            <div class="game-image">👿</div>
+                            <h3>Level Devil</h3>
+                            <p>Beat tricky levels and outsmart the devil!</p>
+                            <a href="https://www.leveldevil.com/" target="_blank" class="play-btn">Play Now</a>
+                        </div>
+                        <div class="game-card" data-name="google snake">
+                            <div class="game-image">🐍</div>
+                            <h3>Google Snake</h3>
+                            <p>The classic snake game - catch the food!</p>
+                            <a href="https://www.google.com/search?q=snake+game" target="_blank" class="play-btn">Play Now</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Action Games -->
+                <section class="game-section" data-category="action">
+                    <h2 class="category-title">⚡ Action Games</h2>
+                    <div class="games-grid">
+                        <div class="game-card" data-name="stone grass cutter">
+                            <div class="game-image">✂️</div>
+                            <h3>Stone Grass Cutter</h3>
+                            <p>Cut grass and smash stones!</p>
+                            <a href="https://www.stonegrasscutter.com/" target="_blank" class="play-btn">Play Now</a>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Suggest Game Page -->
+        <div id="suggest-page" class="page">
+            <div class="suggest-container">
+                <h2>Suggest a Game 🎮</h2>
+                <p>Know a cool game we should add? Let us know!</p>
+                
+                <form id="suggestionForm" class="suggestion-form">
+                    <div class="form-group">
+                        <label for="gameName">Game Name *</label>
+                        <input type="text" id="gameName" name="gameName" placeholder="e.g., Flappy Bird" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gameUrl">Game URL *</label>
+                        <input type="url" id="gameUrl" name="gameUrl" placeholder="https://example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gameCategory">Category *</label>
+                        <select id="gameCategory" name="gameCategory" required>
+                            <option value="">Select a category</option>
+                            <option value="adventure">Adventure</option>
+                            <option value="puzzle">Puzzle</option>
+                            <option value="action">Action</option>
+                            <option value="sports">Sports</option>
+                            <option value="strategy">Strategy</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gameDescription">Description</label>
+                        <textarea id="gameDescription" name="gameDescription" placeholder="Brief description of the game..." rows="4"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="yourName">Your Name</label>
+                        <input type="text" id="yourName" name="yourName" placeholder="Your name (optional)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="yourEmail">Your Email</label>
+                        <input type="email" id="yourEmail" name="yourEmail" placeholder="your.email@example.com (optional)">
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit Suggestion</button>
+                </form>
+
+                <div id="successMessage" class="success-message" style="display: none;">
+                    ✅ Thank you for your suggestion! We'll review it soon.
+                </div>
+
+                <div id="errorMessage" class="error-message" style="display: none;">
+                    ❌ Please fill in all required fields.
+                </div>
+
+                <!-- Suggestions List -->
+                <div class="suggestions-list">
+                    <h3>Recent Suggestions</h3>
+                    <div id="suggestionsList" class="suggestions-items">
+                        <p style="color: #999;">No suggestions yet. Be the first to suggest a game!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Game Central. All rights reserved. Have fun gaming! 🎮</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
