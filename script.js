@@ -1,29 +1,62 @@
+// Page Navigation
+const navLinks = document.querySelectorAll('.nav-link');
+const pages = document.querySelectorAll('.page');
+
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const pageId = link.getAttribute('data-page') + '-page';
+        navigateToPage(link.getAttribute('data-page'));
+    });
+});
+
+function navigateToPage(pageName) {
+    // Remove active class from all links and pages
+    navLinks.forEach(link => link.classList.remove('active'));
+    pages.forEach(page => page.classList.remove('active'));
+
+    // Add active class to clicked link
+    document.querySelector(`[data-page="${pageName}"]`)?.classList.add('active');
+
+    // Show the corresponding page
+    document.getElementById(`${pageName}-page`).classList.add('active');
+
+    // Scroll to top
+    window.scrollTo(0, 0);
+}
+
+// Go to game function
+function goToGame(gameName) {
+    navigateToPage('games');
+    setTimeout(() => {
+        const gameCard = Array.from(document.querySelectorAll('.game-card')).find(card =>
+            card.getAttribute('data-name').toLowerCase().includes(gameName.toLowerCase())
+        );
+        if (gameCard) {
+            gameCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }, 100);
+}
+
+// Filter and navigate to games
+function filterAndNavigate(category) {
+    navigateToPage('games');
+    setTimeout(() => {
+        const btn = document.querySelector(`[data-category="${category}"]`);
+        if (btn) {
+            btn.click();
+        }
+    }, 100);
+}
+
 // Search functionality
 const searchInput = document.getElementById('searchInput');
 const gameCards = document.querySelectorAll('.game-card');
 const categoryBtns = document.querySelectorAll('.category-btn');
 const gameSections = document.querySelectorAll('.game-section');
-const navBtns = document.querySelectorAll('.nav-btn');
-const pages = document.querySelectorAll('.page');
 
 let currentCategory = 'all';
 
-// Page Navigation
-navBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const pageId = btn.getAttribute('data-page') + '-page';
-        
-        // Remove active class from all buttons and pages
-        navBtns.forEach(b => b.classList.remove('active'));
-        pages.forEach(p => p.classList.remove('active'));
-        
-        // Add active class to clicked button and corresponding page
-        btn.classList.add('active');
-        document.getElementById(pageId).classList.add('active');
-    });
-});
-
-// Search games
 if (searchInput) {
     searchInput.addEventListener('input', filterGames);
 }
@@ -72,13 +105,10 @@ function filterByCategory() {
         const category = section.getAttribute('data-category');
 
         if (currentCategory === 'all') {
-            section.classList.remove('hidden');
             section.style.display = '';
         } else if (category === currentCategory) {
-            section.classList.remove('hidden');
             section.style.display = '';
         } else {
-            section.classList.add('hidden');
             section.style.display = 'none';
         }
     });
@@ -123,7 +153,7 @@ function handleSuggestionSubmit(e) {
 
     // Save to localStorage
     let suggestions = JSON.parse(localStorage.getItem('gameSuggestions')) || [];
-    suggestions.unshift(suggestion); // Add to beginning of array
+    suggestions.unshift(suggestion);
     localStorage.setItem('gameSuggestions', JSON.stringify(suggestions));
 
     // Show success message
